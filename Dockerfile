@@ -74,7 +74,7 @@ ENV NUMBAPRO_NVVM=/usr/local/cuda/nvvm/lib64/libnvvm.so
 ENV NUMBAPRO_LIBDEVICE=/usr/local/cuda/nvvm/libdevice
 
 VOLUME [ "/root/dataset" ]
-VOLUME [ "/root/data"]
+VOLUME [ "/root/model"]
 
 EXPOSE 8888
 
@@ -82,8 +82,8 @@ CMD ["/bin/bash"]
 
 # ======= make docker
 # docker build -t clocs .
-# docker run -it -v /home3/hqlab/chenqilong/dataset:/root/dataset clocs
+# docker run -it -v /home3/hqlab/chenqilong/dataset:/root/dataset -v /home3/hqlab/chenqilong/model:/root/model clocs
 # python create_data.py create_kitti_info_file /root/dataset/KITTI_DATASET/
 # python create_data.py create_groundtruth_database /root/dataset/KITTI_DATASET/
-# CUDA_VISIBLE_DEVICES=1 python ./pytorch/train.py train --config_path=./configs/car.fhd.config --model_dir=../second_model/
-# CUDA_VISIBLE_DEVICES=1 python ./pytorch/train.py evaluate --config_path=./configs/car.fhd.config --model_dir=../second_model/ --measure_time=True --batch_size=1
+# CUDA_VISIBLE_DEVICES=1 python ./pytorch/train.py train --config_path=./configs/car.fhd.config --model_dir=/root/model/pretrained_model/
+# CUDA_VISIBLE_DEVICES=1 python ./pytorch/train.py evaluate --config_path=./configs/car.fhd.config --model_dir=/root/model/pretrained_model/ --measure_time=True --batch_size=1
